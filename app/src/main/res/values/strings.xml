@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Aplicacion38</string>
+    <string name="lista_vacia">Sin Datos</string>
+    <string name="label_nombre_hipoteca">Nombre hipoteca</string>
+    <string name="label_condiciones">Nombre condiciones</string>
+    <string name="label_contacto">Nombre contacto</string>
+    <string name="label_telefono">Nombre Telefono</string>
+    <string name="label_email">Nombre Email</string>
+    <string name="label_observaciones">Nombre observaciones</string>
+    <string name="menu_crear">Nuevo</string>
+    <string name="boton_guardar">Guardar</string>
+    <string name="boton_cancelar">Cancelar</string>
+    <string name="hipoteca_crear_titulo">Nueva Hipoteca</string>
+    <string name="hipoteca_crear_confirmacion">Hipoteca creada</string>
+    <string name="hipoteca_editar_titulo">Editar Hipoteca</string>
+    <string name="hipoteca_editar_confirmacion">Hipoteca modificada</string>
+    <string name="menu_editar">Editar</string>
+</resources>
