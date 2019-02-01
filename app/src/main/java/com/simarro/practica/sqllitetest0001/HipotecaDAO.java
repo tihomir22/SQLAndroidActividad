@@ -6,8 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class HipotecaDAO {
-
+    /**
+     * Definimos constante con el nombre de la tabla, así no nos equivocamos
+     */
     public static final String C_TABLA = "hipotecas" ;
+    /**
+     * Definimos constantes con el nombre de las columnas de la tabla, así no nos equivocamos
+     */
     public static final String C_COLUMNA_ID = "_id";
     public static final String C_COLUMNA_NOMBRE = "nombre";
     public static final String C_COLUMNA_CONDICIONES = "condiciones";
@@ -15,6 +20,7 @@ public class HipotecaDAO {
     public static final String C_COLUMNA_EMAIL = "email";
     public static final String C_COLUMNA_TELEFONO = "telefono";
     public static final String C_COLUMNA_OBSERVACIONES = "observaciones";
+    public static final String C_COLUMNA_PASIVO = "pasivo_sn";
     private Context contexto;
     private HipotecasDB dbHelper;
     private SQLiteDatabase db;
@@ -23,7 +29,7 @@ public class HipotecaDAO {
      */
     private String[] columnas = new String[]{ C_COLUMNA_ID, C_COLUMNA_NOMBRE,
             C_COLUMNA_CONDICIONES, C_COLUMNA_CONTACTO, C_COLUMNA_EMAIL,
-            C_COLUMNA_TELEFONO, C_COLUMNA_OBSERVACIONES} ;
+            C_COLUMNA_TELEFONO, C_COLUMNA_OBSERVACIONES, C_COLUMNA_PASIVO} ;
 
 
     public HipotecaDAO(Context context) {
@@ -76,5 +82,11 @@ public class HipotecaDAO {
             result = db.update(C_TABLA, reg, "_id=" + id, null);
         }
         return result;
+    }
+
+    public long delete(long id) {
+        if (db == null)
+            abrir();
+        return db.delete(C_TABLA, "_id=" + id, null);
     }
 }

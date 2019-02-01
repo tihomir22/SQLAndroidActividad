@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class HipotecasDB extends SQLiteOpenHelper {
 
-    private static int version = 1;
+    private static int version = 3;
     private static String nombreBD = "HipotecasDB" ;
     private static SQLiteDatabase.CursorFactory factory = null;
 
@@ -28,12 +28,48 @@ public class HipotecasDB extends SQLiteOpenHelper {
         for(int i=0;i<sqlInsertHipotecas.length;i++){
             db.execSQL(sqlInsertHipotecas[i]);
         }
+// Aplicamos las sucesivas actualizaciones
+        upgrade_2(db);
+        upgrade_3(db);
         Log.i(this.getClass().toString(), "Datos iniciales cargados");
         Log.i(this.getClass().toString(), "Base de datos inicial creada");
 
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+
+        // Actualización a versión 2
+        if (oldVersion < 2)
+        {
+            upgrade_2(db);
+        }
+// Actualización a versión 3
+        if (oldVersion < 3)
+        {
+            upgrade_3(db);
+        }
+    }
+
+    private void upgrade_2(SQLiteDatabase db)
+    {
+//
+// Upgrade versión 2: definir algunos datos de ejemplo
+//
+
+        db.execSQL( "UPDATE hipotecas SET contacto = 'Julián Gómez Martínez'," +
+                        " email = 'jgmartinez@gmail.com'," +
+                        " observaciones = 'Tiene toda la documentación y está estudiando la solicitud. En breve llamará para informar de las condiciones'" +
+        " WHERE _id = 1");
+        Log.i(this.getClass().toString(), "Actualización versión 2 finalizada");
+    }
+    private void upgrade_3(SQLiteDatabase db)
+    {
+//
+// Upgrade versión 3: Incluir pasivo_sn
+//
+        db.execSQL("ALTER TABLE hipotecas ADD pasivo_sn VARCHAR2(1) NOT NULL DEFAULT 'N'");
+        Log.i(this.getClass().toString(), "Actualización versión 3 finalizada");
     }
 
 
